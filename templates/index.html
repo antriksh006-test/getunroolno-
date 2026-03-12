@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form action="/data" method="post">
+
+<label for="user">Enter value</label>
+<input list="userr" name="userinp" id="user"/>
+
+<datalist id="userr">
+    <option value="8894122242">8894122242</option>
+</datalist>
+</form>
+{% if result%}
+<h1>ur result</h1>
+<p>{{result}}</p>
+{% endif%}
+</body>
+</html>
