@@ -3,21 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MLSMC Data Fetcher</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        
+        /* THE LOADER CSS */
+        #loader { display: none; margin-top: 20px; }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .result-box { margin-top: 20px; padding: 15px; background: #e8f5e9; border: 1px solid #4caf50; border-radius: 4px; color: #2e7d32; }
+    </style>
 </head>
 <body>
-<form action="/data" method="post">
 
-<label for="user">Enter value</label>
-<input list="userr" name="userinp" id="user"/>
+<div class="card">
+    <h2>Extract Profile</h2>
+    
+    <form action="/data" method="post" id="mainForm">
+        <label for="user">Enter Phone Number:</label>
+        <input list="userr" name="userinp" id="user" required placeholder="e.g. 8894122242"/>
+        <datalist id="userr">
+            <option value="8894122242">8894122242</option>
+        </datalist>
+        <button type="submit" id="submitBtn">Fetch Now</button>
+    </form>
 
-<datalist id="userr">
-    <option value="8894122242">8894122242</option>
-</datalist>
-</form>
-{% if result%}
-<h1>ur result</h1>
-<p>{{result}}</p>
-{% endif%}
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Running Selenium... Please wait.</p>
+    </div>
+
+    {% if result %}
+    <div class="result-box">
+        <strong>Result:</strong>
+        <p>{{ result }}</p>
+    </div>
+    {% endif %}
+</div>
+<p> still this is a practice project </p>
+<script>
+    // This script runs when the form is submitted
+    const form = document.getElementById('mainForm');
+    const btn = document.getElementById('submitBtn');
+    const loader = document.getElementById('loader');
+
+    form.onsubmit = function() {
+        // 1. Hide the button so they don't click it twice
+        btn.style.display = 'none';
+        // 2. Show the loader
+        loader.style.display = 'block';
+    };
+</script>
+
 </body>
 </html>
